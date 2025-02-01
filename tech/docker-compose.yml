@@ -1,0 +1,35 @@
+services:
+  mq:
+    image: rabbitmq:4.0.1-management-alpine
+    restart: always
+    network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .docker/rabbitmq:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+  storage:
+    command: server /data --console-address ":9001"
+    image: minio/minio
+    restart: always
+    network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./.docker/minio/data:/data
+    ports:
+      - 9000:9000
+      - 9001:9001
+  db:
+    image: mongo
+    restart: always
+    network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 27017:27017

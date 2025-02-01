@@ -1,0 +1,4 @@
+tech/.docker/
+be/node_modules/
+fe/node_modules/
+fe/dist/
