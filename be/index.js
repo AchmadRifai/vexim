@@ -2,7 +2,7 @@ require('dotenv').config()
 
 console.log(`[${new Date().toISOString()}] Ok`)
 
-const express = require('express'), fs = require('fs'), ws = require('./websocket')
+const express = require('express'), fs = require('fs'), ws = require('./websocket'),gql=require('./graphql')
 
 const app = express().use(express.json())
     .use(express.urlencoded({ extended: true }))
@@ -23,5 +23,6 @@ function recurrsiveRouting(pathParent = '', url = '') {
 }
 
 recurrsiveRouting('./routes', '')
+gql.graphqlTest(app)
 
 ws.connectingIo(app).listen(8080, () => console.log(`[${new Date().toISOString()}] listening on localhost:8080`))
