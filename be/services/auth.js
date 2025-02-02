@@ -10,13 +10,14 @@ async function login(req = express.request, res = express.response) {
         for (const user of users) {
             if (user.password === password) {
                 user1 = user
+                delete user1.password
                 break
             }
         }
     })
     if (!user1) throw new Error('User not found')
     const tokens = jwt.encrypt(user1._id)
-    res.json({ 'msg': 'Success', tokens })
+    res.json({ 'msg': 'Success', tokens, user: user1 })
 }
 
 module.exports = { login }
