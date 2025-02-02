@@ -8,5 +8,6 @@ onMounted(() => {
 </script>
 
 <template>
-    <AuthenticatedLayout></AuthenticatedLayout>
+    <AuthenticatedLayout>
+    </AuthenticatedLayout>
 </template>

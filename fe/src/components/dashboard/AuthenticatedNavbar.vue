@@ -1,7 +1,10 @@
 <script setup>
+import { useSession } from '../../stores/session'
 import DarkModeNav from './DarkModeNav.vue'
 import NavStart from './NavStart.vue'
 import ProfileNav from './ProfileNav.vue'
+
+const session = useSession()
 </script>
 <template>
     <nav class="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -15,7 +18,7 @@ import ProfileNav from './ProfileNav.vue'
                         </span>
                     </div>
                     <DarkModeNav />
-                    <ProfileNav />
+                    <ProfileNav v-if="session.token" />
                 </div>
             </div>
         </div>
