@@ -11,6 +11,7 @@ async function login(req = express.request, res = express.response) {
             if (user.password === password) {
                 user1 = user
                 delete user1.password
+                user1.roles = await c.db('vexim').collection('roles').find({ name: { $in: user1.roles } }).toArray()
                 break
             }
         }
